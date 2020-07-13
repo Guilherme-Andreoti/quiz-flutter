@@ -23,7 +23,7 @@ class ResultDialog {
           title: CircleAvatar(
             backgroundColor: correct ? Colors.green : Colors.red,
             child: Icon(
-              correct ? FontAwesomeIcons.check : FontAwesomeIcons.eraser,
+              correct ? Icons.check : Icons.close,
               color: Colors.grey.shade900,
             ),
           ),
