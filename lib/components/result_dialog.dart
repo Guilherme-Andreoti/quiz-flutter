@@ -22,10 +22,16 @@ class ResultDialog {
           ),
           title: CircleAvatar(
             backgroundColor: correct ? Colors.green : Colors.red,
-            child: Icon(
-              correct ? Icons.check : Icons.close,
+            child: IconButton(
+              // icon: FaIcon(FontAwesomeIcons.surprise),
+              icon: FaIcon(correct ? FontAwesomeIcons.thumbsUp : FontAwesomeIcons.thumbsDown),
+              onPressed: (){},
               color: Colors.grey.shade900,
             ),
+            // child: Icon(
+            //   correct ? FaIcon(FontAwesomeIcons.check) : Icons.close,
+            //   color: Colors.grey.shade900,
+            // ),
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

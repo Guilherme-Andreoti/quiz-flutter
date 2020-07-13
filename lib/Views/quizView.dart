@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quiz/Controllers/quiz_controller.dart';
 import 'package:quiz/components/centered_circular_progress.dart';
 import 'package:quiz/components/centered_message.dart';
@@ -36,7 +37,7 @@ final _controller = QuizController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade900,
-        title: Text('BOLSOQUIZ ( ${_scoreKeeper.length}/10 )'),
+        title: Text('BOLSOQUIZ ( ${_scoreKeeper.length}/12 )'),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -56,7 +57,7 @@ final _controller = QuizController();
     if (_controller.questionsNumber == 0)
       return CenteredMessage(
         'Sem questões',
-        icon: Icons.warning,
+        icon: FontAwesomeIcons.exclamationTriangle,
       );
 
     return Column(
@@ -122,13 +123,19 @@ final _controller = QuizController();
               onNext: () {
                 setState(() {
                   _scoreKeeper.add(
-                    Icon(
-                      correct ? Icons.check : Icons.close,
+                     IconButton(
+
+                      icon: FaIcon(correct ? FontAwesomeIcons.thumbsUp : FontAwesomeIcons.thumbsDown),
+                      iconSize: 16.0,
+                      onPressed: (){},
+                      padding:EdgeInsets.all(1.0),
+                      
                       color: correct ? Colors.green : Colors.red,
+                      
                     ),
                   );
 
-                  if (_scoreKeeper.length < 10) {
+                  if (_scoreKeeper.length < 12) {
                     _controller.nextQuestion();
                   } else {
                     FinishDialog.show(
@@ -147,8 +154,10 @@ final _controller = QuizController();
 
   _buildScoreKeeper() {
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Wrap(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 2, // to apply margin in the main axis of the wrap
+        runSpacing: 2, 
         children: _scoreKeeper,
       ),
     );

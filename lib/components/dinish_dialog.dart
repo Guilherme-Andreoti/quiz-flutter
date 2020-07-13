@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quiz/views/quizView.dart';
 import 'package:share/share.dart';
 
@@ -22,8 +23,10 @@ class FinishDialog {
           title: CircleAvatar(
             backgroundColor: Colors.green,
             maxRadius: 35.0,
-            child: Icon(
-              hitNumber < 6 ? Icons.warning : Icons.favorite,
+            child: IconButton(
+              // icon: FaIcon(FontAwesomeIcons.surprise),
+              icon: FaIcon(hitNumber < 6 ? FontAwesomeIcons.thumbsDown : FontAwesomeIcons.handPointRight),
+              onPressed: (){},
               color: Colors.grey.shade900,
             ),
           ),
