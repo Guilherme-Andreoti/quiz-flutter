@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz/Models/questions.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
 class ResultDialog {
   static Future show(
     BuildContext context, {
@@ -12,6 +13,8 @@ class ResultDialog {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
+
+      
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.grey.shade900,

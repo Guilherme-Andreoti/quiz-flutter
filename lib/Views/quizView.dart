@@ -60,7 +60,7 @@ final _controller = QuizController();
         'Sem questões',
         icon: FontAwesomeIcons.exclamationTriangle,
       );
-
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -148,4 +148,6 @@ final _controller = QuizController();
       ),
     );
   }
+
+  
 }
