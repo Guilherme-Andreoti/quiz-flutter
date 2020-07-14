@@ -5,6 +5,7 @@ import 'package:quiz/Controllers/quiz_controller.dart';
 import 'package:quiz/components/centered_circular_progress.dart';
 import 'package:quiz/components/centered_message.dart';
 import 'package:quiz/components/dinish_dialog.dart';
+import 'package:quiz/components/QuestionContainer.dart';
 import 'package:quiz/components/result_dialog.dart';
 
 class quizView extends StatefulWidget {
@@ -64,7 +65,7 @@ final _controller = QuizController();
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        _buildQuestion(_controller.getQuestion()),
+        QuestionContainer(_controller.getQuestion()),
         _buildAnswerButton(_controller.getAnswer1()),
         _buildAnswerButton(_controller.getAnswer2()),
         _buildScoreKeeper(),
@@ -72,29 +73,12 @@ final _controller = QuizController();
     );
   }
 
-  _buildQuestion(String question) {
-    return Expanded(
-      flex: 5,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: Center(
-          child: Text(
-            question,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 25.0,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+
 
   _buildAnswerButton(String answer) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: AnswerButton(),
         child: GestureDetector(
           child: Container(
             padding: EdgeInsets.all(4.0),
@@ -151,6 +135,8 @@ final _controller = QuizController();
       ),
     );
   }
+
+  EdgeInsets AnswerButton() => EdgeInsets.symmetric(vertical: 8.0);
 
   _buildScoreKeeper() {
     return Expanded(
