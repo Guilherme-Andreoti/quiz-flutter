@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quiz/Controllers/quiz_controller.dart';
 import 'package:quiz/components/centered_circular_progress.dart';
 import 'package:quiz/components/centered_message.dart';
-import 'package:quiz/components/dinish_dialog.dart';
+import 'package:quiz/components/finish_dialog.dart';
 import 'package:quiz/components/QuestionContainer.dart';
 import 'package:quiz/components/result_dialog.dart';
 

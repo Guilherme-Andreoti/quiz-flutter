@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/Models/questions.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quiz/views/quizView.dart';
+import 'package:share/share.dart';
 
-
-class ResultDialog {
+class FinishDialog {
   static Future show(
     BuildContext context, {
-    @required Question question,
-    @required bool correct,
-    @required Function onNext,
-  }) {
+    int hitNumber,
+  }){
     return showGeneralDialog(
     barrierColor: Colors.black.withOpacity(0.5),
     transitionBuilder: (context, a1, a2, widget) {
-      return Transform.scale(
-        scale: a1.value,
+      final curvedValue = Curves.easeInOutBack.transform(a1.value) -   1.0;
+      return Transform(
+        transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
         child: Opacity(
           opacity: a1.value,
           child: AlertDialog(
@@ -22,10 +22,11 @@ class ResultDialog {
             shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0)),
             title: CircleAvatar(
-            backgroundColor: correct ? Colors.green : Colors.red,
+            backgroundColor: Colors.green,
+            maxRadius: 35.0,
             child: IconButton(
               // icon: FaIcon(FontAwesomeIcons.surprise),
-              icon: FaIcon(correct ? FontAwesomeIcons.thumbsUp : FontAwesomeIcons.thumbsDown),
+              icon: FaIcon(hitNumber < 6 ? FontAwesomeIcons.thumbsDown : FontAwesomeIcons.handPointRight),
               onPressed: (){},
               color: Colors.grey.shade900,
             ),
@@ -35,7 +36,7 @@ class ResultDialog {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  question.question,
+                  'Parabéns',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -44,15 +45,15 @@ class ResultDialog {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  correct ? 'Bolsonaro te deu parabéns!' : 'Bolsonaro não concorda! O correto',
+                  'Você acertou $hitNumber de 12!',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: correct ? Colors.green : Colors.red,
+                    color: Colors.white,
                   ),
                 ),
                 Text(
-                  question.answer1,
+                  'Que tal tentar mais uma vez? Quem sabe você consegue ser mais patriota na próxima!',
                   style: TextStyle(
                     color: Colors.white70,
                   ),
@@ -60,18 +61,33 @@ class ResultDialog {
               ],
             ),
             actions: [
-              FlatButton(
-                child: const Text('PRÓXIMO'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  onNext();
-                },
-              )
-            ],
+            FlatButton(
+              child: const Text('COMPARTILHAR'),
+              onPressed: () {
+                Share.share('Bolsoquiz: Você acertou $hitNumber de 12!');
+              },
+            ),
+            FlatButton(
+              child: const Text('JOGAR NOVAMENTE'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => quizView()),
+                );
+              },
+            ),
+            FlatButton(
+              child: const Text('SAIR'),
+              onPressed: () {
+                SystemNavigator.pop();
+              },
+            )
+          ],
           ),
         ),
       );
     },
+    
     transitionDuration: Duration(milliseconds: 200),
     barrierDismissible: true,
     barrierLabel: '',
